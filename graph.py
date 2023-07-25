@@ -1,26 +1,37 @@
+
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    data = [
-        
-        ("01-01-2020",1597),
-        ("02-01-2020",1519),
-        ("03-01-2020",4845),
-        ("04-01-2020",1854),
-        ("05-01-2020",8789),
-        ("06-01-2020",6220),
-        ("07-01-2020",1000),
-        ("08-01-2020",1597),
-        ]
-    labels = [row[0] for row in data]
-    values = [row[1] for row in data]
+
+@app.route('/')
+def homepage():
+
+	
+	labels = [
+		'0-10',
+		'10-20',
+		'20-30',
+		'30-40',
+		'40-50',
+		'50-60',
+		'60-70',
+		'70-80',
+		'80-90',
+		'90-100'
+	]
+
+	data = [0, 10, 15, 8, 22, 18, 25, 45, 60, 30]
+
+	
+	return render_template(
+		template_name_or_list='graph.html',
+		data=data,
+		labels=labels,
+	)
 
 
-    return render_template("graph.html", labels=labels, values=values)
 
-
-if __name__ == "__main__":
-    app.run(debug="True")
+if __name__ == '__main__':
+	
+	app.run(debug=True)
